@@ -9,8 +9,24 @@
   height: 500px;
   width: 750px;
   background-color: red;
+  margin: auto;
+  position: relative;
+  /* margin-top: 20px; */
   /* margin: auto; */
   /* margin-top: 100px */
-  
+  display: flex;
+
+}
+.pillar{
+  position: absolute;
+  bottom: 0;
+}
+.spot{
+  /* height: 100px; */
+  width: 100px;
+  background-color: blue;
+  /* position: absolute;  */
+  bottom: 0;
+  float: left;
 
 }
