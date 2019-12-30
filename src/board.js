@@ -4,6 +4,10 @@ export class Board {
   constructor(el){
     this.$el = el;
     this.populate()
+    // this.test()
+    debugger
+    this._swap(0, 1)
+    this.arr = null
   }
   _shuffle(arr) {
     let curr = arr.length, temp, randIdx;
@@ -19,34 +23,41 @@ export class Board {
     }
     return arr;
   }
-  change_spot(top, left){
-  
-    $(".spot").css({"top": top, "left": left})
+  _swap(pos1, pos2){
+    let $1 = $(`.${pos1}`);
+    let $2 = $(`.${pos2}`);
+    let $pillar1 = $(`div.${pos1} > div`)
+    let $pillar2 = $(`div.${pos2} > div`)
+    $1.empty()
+    $2.empty()
+    $1.append($pillar2)
+    $2.append($pillar1)
   }
   populate(){
-    let array = [1,2,3,4,5,6,7,8,9,10]
+    let array = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
     // debugger
     let shuffled = this._shuffle(array)
-    // const section = $("<div>")
-    // section.addClass("section")
-    // this.$el.append(section)
-    // // for(let i = 0; i < array.length; i++){
 
-    // // }
-    // let spot = $("<div>")
-    // spot.addClass("spot")
-    // section.append(spot)
-
-    debugger
-    shuffled.map(height => {
-      const div = $("<div>")
+    this.arr = array
+    for (let i = 0; i < 15; i++) {
+      const div = $("<div>");
       div.addClass("spot")
-          .data("height", height)
-          .css("height",`${height * 40}px`)
-      $(".section").append(div)
-    })
-
-
+      .addClass(`${i}`)
+      .data("index", i)
+      $(".section").append(div);
+    }
+    this._fillColumns(shuffled)
+  }
+  _fillColumns(arr){
+    for (let i = 0; i < arr.length; i++) {
+      const height = arr[i];
+      let $div = $(`.${i}`)
+      const pillar = $("<div>")
+      pillar
+      .addClass("pillar")
+      .css({"height": `${(1 * height) * 30}px`})
+      $div.append(pillar)
+    }
   }
 
 }
