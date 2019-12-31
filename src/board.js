@@ -1,3 +1,4 @@
+import quickSort from "./quicksort";
 
 
 export class Board {
@@ -6,8 +7,20 @@ export class Board {
     this.populate()
     // this.test()
     debugger
-    this._swap(0, 1)
+    // this._swap(0, 1)
     this.arr = null
+    this.bindEvents()
+  }
+  bindEvents() {
+    const that = this
+    $("quicksort").click(function(e) {
+      that.quicksort();
+    });
+    
+  }
+  quicksort(){
+    let quicksort = new quickSort(this.arr)
+    this.arr = quicksort.sort()
   }
   _shuffle(arr) {
     let curr = arr.length, temp, randIdx;
@@ -23,16 +36,16 @@ export class Board {
     }
     return arr;
   }
-  _swap(pos1, pos2){
-    let $1 = $(`.${pos1}`);
-    let $2 = $(`.${pos2}`);
-    let $pillar1 = $(`div.${pos1} > div`)
-    let $pillar2 = $(`div.${pos2} > div`)
-    $1.empty()
-    $2.empty()
-    $1.append($pillar2)
-    $2.append($pillar1)
-  }
+  // _swap(pos1, pos2){
+  //   let $1 = $(`.${pos1}`);
+  //   let $2 = $(`.${pos2}`);
+  //   let $pillar1 = $(`div.${pos1} > div`)
+  //   let $pillar2 = $(`div.${pos2} > div`)
+  //   $1.empty()
+  //   $2.empty()
+  //   $1.append($pillar2)
+  //   $2.append($pillar1)
+  // }
   populate(){
     let array = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
     // debugger
@@ -55,6 +68,7 @@ export class Board {
       const pillar = $("<div>")
       pillar
       .addClass("pillar")
+      .data("count", height)
       .css({"height": `${(1 * height) * 30}px`})
       $div.append(pillar)
     }
